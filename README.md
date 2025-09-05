@@ -26,14 +26,14 @@ graph TD
 
     subgraph "Core System (Containerized via Docker)"
         E["Multi-Agent Orchestrator"] --> F("Backtesting & Simulation Engine");
-      
+    
         subgraph "Alpha Modules & Strategies"
             G["Classic Factor Library<br/>Value, Momentum, etc."] --> F;
             H["Machine Learning Factors<br/>- NLP Sentiment Analysis (LLM)<br/>- Predictive Models (RF, etc.)"] --> F;
             I["Deep Reinforcement Learning Allocator"] --> F;
             J["Risk Management Overlays"] --> F;
         end
-      
+    
         C -- "Reads" --> F;
         D -- "Reads" --> F;
     end
@@ -79,13 +79,18 @@ I designed a robust ETL system to handle the high volume and complexity of histo
 * **Solution:** I developed an automated pipeline that programmatically identifies, parses, and cleans the target data. It transforms the raw information into a clean, query-optimized format (Parquet), making it readily available for research and backtesting. This process reduced the time for data preparation from weeks to minutes.
 * **Impact:** Enabled the fund to leverage a vast dataset that was previously inaccessible, unlocking new research possibilities.
 
-### 2. Cyclical & Conditional Agentic Workflow for Alpha Discovery
+### 2. Modular Multi-Agent System with Agentic Workflows
 
-Inspired by modern AI architectures like LangGraph, I designed the multi-agent system not as a linear pipeline, but as a stateful, cyclical graph capable of automated, iterative research.
+Inspired by modern AI architectures like LangGraph, the system is built around a collection of specialized, autonomous agents that collaborate through event-driven orchestration. This modular design goes beyond a simple linear pipeline, enabling complex, stateful workflows.
 
-* **Problem:** Alpha discovery is not a linear process; it requires iteration, critique, and refinement. A simple sequential orchestrator cannot replicate this.
-* **Solution:** The system employs a state-driven workflow where specialized agents (e.g., `Researcher`, `Coder`, `Backtester`, `Critique`) operate as nodes in a graph. A shared "State" object, containing the current hypothesis, code, and backtest results, is passed between them. Conditional logic at the `Critique` node evaluates the backtest performance and determines the next step: either finalizing the factor or looping back to the `Researcher` with constructive feedback for another iteration.
-* **Impact:** Transformed the system from a simple automation tool into a semi-autonomous research platform, capable of exploring, evaluating, and refining investment strategies with minimal human intervention.
+* **Foundational Agents for Core Operations:**
+
+  * **`Data Agent`**: This agent is the backbone of the data pipeline, responsible for the entire ETL process. It autonomously monitors for new unstructured Excel files, executes complex cleaning and parsing logic, validates data quality, and intelligently saves the structured output to the Parquet data lake and PostgreSQL database.
+* **Advanced Agentic Workflow for Alpha Discovery:**
+
+  * **Problem:** Alpha discovery is not a linear process; it requires iteration and refinement.
+  * **Solution:** For creative tasks like alpha generation, the system orchestrates a team of agents (`Researcher`, `Coder`, `Backtester`, `Critique`) in a cyclical, state-driven workflow. A shared "State" object (containing the hypothesis and results) is passed between them. The `Critique` agent's feedback can trigger a loop, sending the process back to the `Researcher` with new instructions, enabling automated, iterative research.
+* **Impact:** This dual-layer architecture provides both a robust, automated foundation for data management (via the `Data Agent`) and a dynamic, intelligent framework for semi-autonomous research, significantly accelerating the entire quantitative workflow.
 
 ### 3. Production-Grade Machine Learning & LLM Integration
 
