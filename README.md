@@ -26,14 +26,14 @@ graph TD
 
     subgraph "Core System (Containerized via Docker)"
         E["Multi-Agent Orchestrator"] --> F("Backtesting & Simulation Engine");
-        
+      
         subgraph "Alpha Modules & Strategies"
             G["Classic Factor Library<br/>Value, Momentum, etc."] --> F;
             H["Machine Learning Factors<br/>- NLP Sentiment Analysis (LLM)<br/>- Predictive Models (RF, etc.)"] --> F;
             I["Deep Reinforcement Learning Allocator"] --> F;
             J["Risk Management Overlays"] --> F;
         end
-        
+      
         C -- "Reads" --> F;
         D -- "Reads" --> F;
     end
@@ -65,7 +65,7 @@ graph TD
 | **Data Engineering**    | ETL Pipeline Architecture, Pandas, NumPy, Parquet, Data Cleaning & Processing                 |
 | **Machine Learning**    | NLP, Sentiment Analysis, LLM Application (GPT), Scikit-learn, PyTorch, Backtesting Frameworks |
 | **DevOps & Infra**      | Docker, Containerization, CI/CD, Shell Scripting, Makefile                                    |
-| **Software Principles** | Scalable System Design, SDLC, Multi-Agent Systems, Test-Driven Development (TDD)              |
+| **Software Principles** | Scalable System Design, SDLC, Agentic Workflows (LangGraph), Test-Driven Development (TDD)    |
 
 ---
 
@@ -79,13 +79,13 @@ I designed a robust ETL system to handle the high volume and complexity of histo
 * **Solution:** I developed an automated pipeline that programmatically identifies, parses, and cleans the target data. It transforms the raw information into a clean, query-optimized format (Parquet), making it readily available for research and backtesting. This process reduced the time for data preparation from weeks to minutes.
 * **Impact:** Enabled the fund to leverage a vast dataset that was previously inaccessible, unlocking new research possibilities.
 
-### 2. Multi-Agent Orchestration Framework
+### 2. Cyclical & Conditional Agentic Workflow for Alpha Discovery
 
-Inspired by modern distributed systems, I architected a multi-agent framework to manage different components of the research pipeline.
+Inspired by modern AI architectures like LangGraph, I designed the multi-agent system not as a linear pipeline, but as a stateful, cyclical graph capable of automated, iterative research.
 
-* **Problem:** A monolithic backtesting system would be hard to maintain and extend with new factors or models.
-* **Solution:** The system is composed of specialized agents (e.g., Data Agent, Factor Agent, Risk Agent) that operate independently and communicate asynchronously. This design makes the system highly extensible and resilient. Adding a new alpha factor is as simple as creating a new, self-contained module without affecting the rest of the system.
-* **Impact:** Significantly accelerated the research and development cycle for new investment strategies.
+* **Problem:** Alpha discovery is not a linear process; it requires iteration, critique, and refinement. A simple sequential orchestrator cannot replicate this.
+* **Solution:** The system employs a state-driven workflow where specialized agents (e.g., `Researcher`, `Coder`, `Backtester`, `Critique`) operate as nodes in a graph. A shared "State" object, containing the current hypothesis, code, and backtest results, is passed between them. Conditional logic at the `Critique` node evaluates the backtest performance and determines the next step: either finalizing the factor or looping back to the `Researcher` with constructive feedback for another iteration.
+* **Impact:** Transformed the system from a simple automation tool into a semi-autonomous research platform, capable of exploring, evaluating, and refining investment strategies with minimal human intervention.
 
 ### 3. Production-Grade Machine Learning & LLM Integration
 
