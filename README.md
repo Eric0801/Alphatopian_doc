@@ -39,7 +39,7 @@ graph TD
     end
 
     subgraph "Output & Delivery"
-        F --> K["Performance Reports<br/>(e.g., QuantStats)"];
+        F --> K["Performance Reports<br/>(e.g., QuantStats, self-made backtesting package)"];
         F --> L("REST API<br/>(FastAPI for real-time queries)");
     end
 
